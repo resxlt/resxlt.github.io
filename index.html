@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown Timer</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS -->
+</head>
+<body>
+  <!-- Background with Slanted Scrolling Text -->
+  <div class="background-wrapper" id="background-wrapper"></div>
+
+  <!-- Main Content: Countdown -->
+  <h1>O Levels Result Day:</h1>
+  <div class="countdown-container">
+    <div class="time-segment">
+      <div class="time-value" id="days">00</div>
+      <div class="time-label">Days</div>
+    </div>
+    <div class="time-segment">
+      <div class="time-value" id="hours">00</div>
+      <div class="time-label">Hours</div>
+    </div>
+    <div class="time-segment">
+      <div class="time-value" id="minutes">00</div>
+      <div class="time-label">Minutes</div>
+    </div>
+    <div class="time-segment">
+      <div class="time-value" id="seconds">00</div>
+      <div class="time-label">Seconds</div>
+    </div>
+  </div>
+
+  <script>
+    // Function to generate background lines with random animations
+    function generateBackgroundLines() {
+      const wrapper = document.getElementById('background-wrapper');
+      const numLines = Math.ceil(window.innerHeight / 150); // Dynamically calculate number of lines based on screen height
+      const lineText = "get gud son";
+
+      // Clear any existing lines
+      wrapper.innerHTML = "";
+
+      // Add the required number of lines with unique animations
+      for (let i = 0; i < numLines; i++) {
+        const line = document.createElement('div');
+        line.classList.add('background-line');
+        line.innerText = lineText;
+
+        // Set a random animation delay and duration for each line
+        const randomDelay = Math.random() * 5 + "s"; // Random delay between 0 and 5 seconds
+        const randomDuration = Math.random() * 10 + 10 + "s"; // Random duration between 10s and 20s
+
+        line.style.animationDuration = randomDuration;
+        line.style.animationDelay = randomDelay;
+
+        wrapper.appendChild(line);
+      }
+    }
+
+    // Countdown Timer Function
+    function updateCountdown() {
+      const targetDate = new Date('August 17, 2025 10:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    // Initial Countdown Call & Interval Update
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Call to generate the background lines based on screen size
+    window.addEventListener('resize', generateBackgroundLines);
+    generateBackgroundLines(); // Initial call
+  </script>
+</body>
+</html>
 
