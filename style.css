@@ -107,6 +107,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
+  }
 
   .time-value {
     font-size: 3em;
@@ -126,4 +127,3 @@ h1 {
     font-size: 14vw; /* Even larger font for very small screens */
   }
 }
-a
